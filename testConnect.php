@@ -50,7 +50,7 @@ try {
 
     <body>
 
-        <h1>Accueil blog</h1>
+        <h1>Test : affich qlq articles de la table wp_post</h1>
 
         <?php foreach ($tab as $row) { ?>
             <h2><?= $row["post_title"] ?></h2>
