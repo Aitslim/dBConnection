@@ -21,14 +21,16 @@ try {
 }
 
 try {
-    $requete = 'SELECT post_title
+    $requete = 'SELECT wp_posts.ID
+                    ,  post_title
                     , post_content
                     , post_date
-                    , u.display_name
-                from wp_posts p, wp_users u
-               where p.post_author = u.ID
+                    , wp_users.display_name
+                from wp_posts, wp_users
+               where post_author = wp_users.ID
                  and post_type = "post"
                  and post_status = "publish"
+                 order by post_date DESC
                  ';
     $req = $dbh->query($requete);
     $req->setFetchMode(PDO::FETCH_ASSOC);
@@ -53,7 +55,7 @@ try {
         <h1>Test : affich qlq articles de la table wp_post</h1>
 
         <?php foreach ($tab as $row) { ?>
-            <h2><?= $row["post_title"] ?></h2>
+            <h2><a href="article.php?id=<?= $row["ID"] ?>"> <?= $row["post_title"] ?></a></h2>
             <p><?= $row["post_content"] ?></p>
             <p>Ecrit par : <?= $row["display_name"] ?> - Le : <?= $row["post_date"] ?></p>
         <?php } ?>
