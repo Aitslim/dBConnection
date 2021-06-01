@@ -14,7 +14,6 @@ $options = array(
 
 try {
     $dbh = new PDO($dsn, $user, $pass, $options);
-    // echo "Connection réussie" . "<br>";
 } catch (PDOException $e) {
     print "Erreur de connexion : " . $e->getMessage() . "<br/>";
     die();

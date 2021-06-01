@@ -1,5 +1,10 @@
 <?php
 
+if (!isset($_GET["id"])) {
+    // die("Paramètre requis !!");
+    header("Location: ListeArticlesBlog.php");
+}
+
 require("dbConnect.php");
 
 try {
@@ -7,7 +12,8 @@ try {
                      , post_content
                      , post_date
                      , wp_users.display_name
-                  from wp_posts, wp_users
+                  from wp_posts
+                     , wp_users
                  where post_author = wp_users.ID
                    and wp_posts.ID = " . $_GET["id"];
     // die($requete);
@@ -43,7 +49,7 @@ try {
 <?php
 
     $dbh = null;
-    // echo "<br>" . "Connection Terminée";
+    // "Fin Connection";
 } catch (PDOException $e) {
     print "Erreur sur la requete : " . $e->getMessage() . "<br/>";
     die();
