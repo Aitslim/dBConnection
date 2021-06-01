@@ -3,13 +3,13 @@
 require("dbConnect.php");
 
 try {
-    $requete = 'SELECT wp_posts.ID as ID
+    $requete = 'SELECT wp_posts.id as id
                      , post_title
                      , post_content
                      , post_date
                      , wp_users.display_name
                   from wp_posts, wp_users
-                 where post_author = wp_users.ID
+                 where post_author = wp_users.id
                    and post_type = "post"
                    and post_status = "publish"
                  order by post_date DESC
@@ -37,7 +37,7 @@ try {
         <h1>Test : affich qlq articles de la table wp_post</h1>
 
         <?php foreach ($tab as $row) { ?>
-            <h2><a href="afficheArticle.php?id=<?= $row["ID"] ?>"> <?= $row["post_title"] ?></a></h2>
+            <h2><a href="afficheArticle.php?id=<?= $row["id"] ?>"> <?= $row["post_title"] ?></a></h2>
             <p><?= $row["post_content"] ?></p>
             <p>Ecrit par : <?= $row["display_name"] ?> - Le : <?= $row["post_date"] ?></p>
         <?php } ?>

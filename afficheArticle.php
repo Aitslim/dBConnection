@@ -10,11 +10,10 @@ try {
                   from wp_posts, wp_users
                  where post_author = wp_users.ID
                    and wp_posts.ID = " . $_GET["id"];
-
+    // die($requete);
     $req = $dbh->query($requete);
     $req->setFetchMode(PDO::FETCH_ASSOC);
-
-    $tab = $req->fetchAll();
+    $row = $req->fetch();
     $req->closeCursor();
 
 ?>
@@ -33,9 +32,9 @@ try {
 
         <h1>Affichage Article</h1>
 
-        <h2><?= $tab[0]["post_title"] ?></h2>
-        <p><?= $tab[0]["post_content"] ?></p>
-        <p>Ecrit par : <?= $tab[0]["display_name"] ?> - Le : <?= $tab[0]["post_date"] ?></p>
+        <h2><?= $row["post_title"] ?></h2>
+        <p><?= $row["post_content"] ?></p>
+        <p>Ecrit par : <?= $row["display_name"] ?> - Le : <?= $row["post_date"] ?></p>
 
     </body>
 
