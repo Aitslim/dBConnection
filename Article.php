@@ -15,9 +15,13 @@ try {
                   from wp_posts
                      , wp_users
                  where post_author = wp_users.ID
-                   and wp_posts.ID = " . $_GET["id"];
+                   and wp_posts.ID = :s";
+
     // die($requete);
-    $req = $dbh->query($requete);
+    $req = $dbh->prepare($requete);
+    $req->bindValue(':s', $_GET["id"], PDO::PARAM_STR);
+    $req->execute();
+
     $req->setFetchMode(PDO::FETCH_ASSOC);
     $row = $req->fetch();
     $req->closeCursor();
